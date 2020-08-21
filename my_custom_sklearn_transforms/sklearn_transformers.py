@@ -52,5 +52,5 @@ class StandardData():
         # Primero copiamos el dataframe de datos de entrada 'X'
         data = X.copy()
         # normalizamos datos, con desviacion estandar = 1
-        data.iloc[:,:-1] = StandardScaler().fit_transform(data.iloc[:,:-1])
+        data = StandardScaler().fit_transform(data)
         return data
