@@ -71,9 +71,9 @@ class ImputerValues():
         for cn in column_names:
             df[cn].replace(np.nan, df[cn].median(), inplace = True)
         return df
-        
 
-Class RemoveOutliers():
+
+class RemoveOutliers():
     def __init__(self, columns):
         self.columns = columns
 
