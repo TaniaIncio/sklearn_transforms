@@ -68,7 +68,7 @@ class ImputerValues():
         # Primero copiamos el dataframe de datos de entrada 'X'
         df = X.copy()
         # replace null values according to the analysis of plots for each feature
-        for cn in column_names:
+        for cn in self.columns:
             df[cn].replace(np.nan, df[cn].median(), inplace = True)
         return df
 
