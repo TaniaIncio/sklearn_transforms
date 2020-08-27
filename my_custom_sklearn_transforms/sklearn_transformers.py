@@ -19,6 +19,17 @@ class DropColumns(BaseEstimator, TransformerMixin):
         return data.drop(labels=self.columns, axis='columns')
 
 
+class AddColumns(BaseEstimator, TransformerMixin):
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        # Primeiro realizamos a cópia do dataframe 'X' de entrada
+        data = X.copy()
+        data['EQ_TOTAL'] = df['EQ_OFICINA'] + df['EQ_TRANSPORTE']
+        return data
+
 
 class Imputer():
 
