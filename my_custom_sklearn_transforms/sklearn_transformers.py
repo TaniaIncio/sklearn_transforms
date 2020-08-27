@@ -139,3 +139,36 @@ class RemoveOutliersNegClass():
 
             df = df.drop(df[(df[cn] > v_upper) | (df[cn] < v_lower)].index)
         return df
+
+
+class RemoveOutliers():
+    def __init__(self, columns):
+        self.columns = columns
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        # Primeiro realizamos a cópia do dataframe 'X' de entrada
+        df = X.copy()
+        y = self.y.copy()
+        # Retornamos um novo dataframe sem as colunas indesejadas
+        for cn in self.columns:
+            v_sosp = df[cn].values
+            q25, q75 = np.percentile(v_sosp, 25), np.percentile(v_sosp, 75)
+            print('Quartile 25: {} | Quartile 75: {}'.format(q25, q75))
+            v_iqr = q75 - q25
+            print('iqr: {}'.format(v_iqr))
+
+            v_cut_off = v_iqr * 1.5
+            v_lower, v_upper = q25 - v_cut_off, q75 + v_cut_off
+            print('Cut Off: {}'.format(v_cut_off))
+            print('v Lower: {}'.format(v_lower))
+            print('v Upper: {}'.format(v_upper))
+
+            outliers = [x for x in v_sosp if x < v_lower or x > v_upper]
+            #print('Feature '+cn+' Outliers for Aceptado Cases: {}'.format(len(outliers)))
+            #print('CXC outliers:{}'.format(outliers))
+
+            df = df.drop(df[(df[cn] > v_upper) | (df[cn] < v_lower)].index)
+        return df
