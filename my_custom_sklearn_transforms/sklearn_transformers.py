@@ -27,7 +27,7 @@ class AddColumns(BaseEstimator, TransformerMixin):
     def transform(self, X):
         # Primeiro realizamos a cópia do dataframe 'X' de entrada
         data = X.copy()
-        data['EQ_TOTAL'] = df['EQ_OFICINA'] + df['EQ_TRANSPORTE']
+        data['EQ_TOTAL'] = data['EQ_OFICINA'] + data['EQ_TRANSPORTE']
         return data
 
 
